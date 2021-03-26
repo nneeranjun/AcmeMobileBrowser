@@ -8,6 +8,9 @@
 import UIKit
 import WebKit
 
+//TODO: Make sure back, forward works when error page is loaded
+//TODO: Handle empty tab list
+
 enum TabType {
     case normal
     case error
@@ -37,7 +40,7 @@ class ViewController: UIViewController, WKNavigationDelegate, UITextFieldDelegat
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        
+        errorPage.errorMessage.text = "Sorry the webpage could not be loaded. Please try again!"
         for tab in tabs {
             if tab.type == .normal {
                 tab.webView.load(URLRequest(url: URL(string: tab.url)!))
@@ -72,12 +75,8 @@ class ViewController: UIViewController, WKNavigationDelegate, UITextFieldDelegat
     
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
         removeCurrentPage()
-        errorPage.errorMessage.text = "Sorry the webpage could not be loaded. Please try again!"
-        tabs[currentTabIndex].webView.removeFromSuperview()
-        webViewContainer.addSubview(errorPage)
-        errorPage.bindFrameToSuperviewBounds()
+        loadErrorPage()
         tabs[currentTabIndex].type = .error
-        
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -88,7 +87,6 @@ class ViewController: UIViewController, WKNavigationDelegate, UITextFieldDelegat
         }
         tab.webView.load(URLRequest(url: URL(string: textField.text!)!))
         searchBar.endEditing(true)
-        //switchTab(to: currentTabIndex)
         return true
 
     }
@@ -123,15 +121,26 @@ class ViewController: UIViewController, WKNavigationDelegate, UITextFieldDelegat
     
     func deleteTab(at index: Int) {
         //delete tab
-        
+        tabs.remove(at: index)
+        if index == currentTabIndex {
+            if tabs.isEmpty {
+                //handle if empty case
+            } else {
+                currentTabIndex = 0
+            }
+            removeCurrentPage()
+            switchTab(to: currentTabIndex)
+        }
     }
     
     func removeCurrentPage() {
         let currTab = tabs[currentTabIndex]
         switch currTab.type {
         case .normal:
+            //if we are coming from a normal page, remove the webView
             currTab.webView.removeFromSuperview()
         case .error:
+            //if we are coming from an error page, remove the error page
             errorPage.removeFromSuperview()
         default: return
         }
@@ -145,11 +154,14 @@ class ViewController: UIViewController, WKNavigationDelegate, UITextFieldDelegat
     }
     
     func switchTab(to index: Int) {
-       //let currTab = tabs[currentTabIndex]
         let newTab = tabs[index]
+        
+        //remove the current page being displayed before switching
         removeCurrentPage()
+        
         switch newTab.type {
         case .normal:
+            //if we are going to a normal page, use the webView
             newTab.webView.navigationDelegate = self
             webViewContainer.addSubview(newTab.webView)
             newTab.webView.bindFrameToSuperviewBounds()

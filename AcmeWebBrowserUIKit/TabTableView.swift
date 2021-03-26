@@ -13,6 +13,7 @@ class TabTableView: UIViewController, UITableViewDelegate, UITableViewDataSource
     
     weak var delegate: ViewController!
     var tabs: [Tab] = []
+    let cellReuseIdentifier = "cell"
     @IBOutlet weak var tableView: UITableView!
     
     @IBAction func addNewTab(_ sender: Any) {
@@ -32,7 +33,9 @@ class TabTableView: UIViewController, UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let row = UITableViewCell(style: .default, reuseIdentifier: "basicRow")
+//        let row: TabCell = self.tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier) as! TabCell
         row.textLabel?.text = tabs[indexPath.row].url
+        row.imageView?.image = UIImage(systemName: "safari")
         return row
     }
     
@@ -42,5 +45,24 @@ class TabTableView: UIViewController, UITableViewDelegate, UITableViewDataSource
         self.dismiss(animated: true, completion: nil)
     }
     
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if (editingStyle == .delete) {
+            // handle delete (by removing the data from your array and updating the tableview)
+            tabs.remove(at: indexPath.row)
+            self.tableView.reloadData()
+            delegate.deleteTab(at: indexPath.row)
+        }
+    }
+    
+    
+}
+
+class TabCell: UITableViewCell {
+    @IBOutlet weak var url: UILabel!
+    @IBOutlet weak var deleteButton: UIButton!
     
 }
