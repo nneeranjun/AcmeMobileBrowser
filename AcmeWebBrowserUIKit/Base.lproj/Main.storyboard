@@ -1,24 +1,154 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="AcmeWebBrowserUIKit" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hXb-Ck-FLR">
+                                <rect key="frame" x="20" y="44" width="374" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VJo-qk-3gd">
+                                <rect key="frame" x="0.0" y="104" width="414" height="705"/>
+                            </containerView>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="68" translatesAutoresizingMaskIntoConstraints="NO" id="3FC-vu-L67">
+                                <rect key="frame" x="102" y="833" width="210" height="29"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M9R-70-8Pq">
+                                        <rect key="frame" x="0.0" y="0.0" width="24" height="29"/>
+                                        <state key="normal">
+                                            <imageReference key="image" image="arrow.backward" catalog="system" symbolScale="large"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="goBack:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Xnf-wj-lnf"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8zI-PU-Auu">
+                                        <rect key="frame" x="92" y="0.0" width="26" height="29"/>
+                                        <state key="normal">
+                                            <imageReference key="image" image="doc.on.doc.fill" catalog="system" symbolScale="large"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="showTabs:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ml6-Eg-i1l"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dSk-OF-9cv">
+                                        <rect key="frame" x="186" y="0.0" width="24" height="29"/>
+                                        <state key="normal">
+                                            <imageReference key="image" image="arrow.forward" catalog="system" symbolScale="large"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="goForward:" destination="BYZ-38-t0r" eventType="touchUpInside" id="0ft-9c-nrQ"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="hXb-Ck-FLR" firstAttribute="centerX" secondItem="VJo-qk-3gd" secondAttribute="centerX" id="11k-rj-4y4"/>
+                            <constraint firstItem="3FC-vu-L67" firstAttribute="top" secondItem="VJo-qk-3gd" secondAttribute="bottom" constant="24" id="88W-a2-wv6"/>
+                            <constraint firstItem="VJo-qk-3gd" firstAttribute="top" secondItem="hXb-Ck-FLR" secondAttribute="bottom" constant="26" id="ECg-ne-zJh"/>
+                            <constraint firstItem="hXb-Ck-FLR" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="I7o-TZ-nh5"/>
+                            <constraint firstItem="3FC-vu-L67" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="S84-sL-0lX"/>
+                            <constraint firstItem="hXb-Ck-FLR" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Vow-hJ-EMQ"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="3FC-vu-L67" secondAttribute="trailing" constant="102" id="W2R-OZ-ux1"/>
+                            <constraint firstItem="hXb-Ck-FLR" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="bal-6c-SsH"/>
+                            <constraint firstItem="VJo-qk-3gd" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="l14-PE-DoB"/>
+                            <constraint firstItem="3FC-vu-L67" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="102" id="u7u-Fa-SXA"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="searchBar" destination="hXb-Ck-FLR" id="7Zp-Eh-xuY"/>
+                        <outlet property="webViewContainer" destination="VJo-qk-3gd" id="t0j-yw-YA3"/>
+                        <segue destination="QUC-ih-19A" kind="presentation" identifier="showTabs" id="G0p-SA-3v8"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="-865.21739130434787" y="-280.58035714285711"/>
+        </scene>
+        <!--Tab Table View-->
+        <scene sceneID="d5M-MY-Qx8">
+            <objects>
+                <viewController id="QUC-ih-19A" customClass="TabTableView" customModule="AcmeWebBrowserUIKit" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="moG-Lv-1n9">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="qfX-ws-WSG">
+                                <rect key="frame" x="0.0" y="65.5" width="414" height="776.5"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="QUC-ih-19A" id="sj5-jt-aax"/>
+                                    <outlet property="delegate" destination="QUC-ih-19A" id="UBt-X8-mr2"/>
+                                </connections>
+                            </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tabs" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zHO-mK-tJ6">
+                                <rect key="frame" x="20" y="20" width="49" height="29"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gmD-5S-qWd">
+                                <rect key="frame" x="359" y="20" width="27" height="25.5"/>
+                                <color key="tintColor" systemColor="systemGreenColor"/>
+                                <state key="normal" image="plus.circle.fill" catalog="system">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="black"/>
+                                </state>
+                                <connections>
+                                    <action selector="addNewTab:" destination="QUC-ih-19A" eventType="touchUpInside" id="clV-ib-26f"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="5I4-aa-gvr"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="qfX-ws-WSG" secondAttribute="bottom" id="4Kv-Y1-S12"/>
+                            <constraint firstItem="zHO-mK-tJ6" firstAttribute="top" secondItem="5I4-aa-gvr" secondAttribute="top" constant="20" id="76O-wh-KD5"/>
+                            <constraint firstItem="qfX-ws-WSG" firstAttribute="top" secondItem="gmD-5S-qWd" secondAttribute="bottom" constant="20" id="DDc-eC-rvE"/>
+                            <constraint firstItem="5I4-aa-gvr" firstAttribute="trailing" secondItem="gmD-5S-qWd" secondAttribute="trailing" constant="28" id="LJ3-5G-X3v"/>
+                            <constraint firstItem="zHO-mK-tJ6" firstAttribute="leading" secondItem="5I4-aa-gvr" secondAttribute="leading" constant="20" id="LRV-9d-dGh"/>
+                            <constraint firstItem="qfX-ws-WSG" firstAttribute="leading" secondItem="5I4-aa-gvr" secondAttribute="leading" id="VeN-qn-3Nn"/>
+                            <constraint firstItem="gmD-5S-qWd" firstAttribute="top" secondItem="5I4-aa-gvr" secondAttribute="top" constant="20" id="o0k-wR-c7e"/>
+                            <constraint firstItem="gmD-5S-qWd" firstAttribute="leading" secondItem="zHO-mK-tJ6" secondAttribute="trailing" constant="290" id="omc-LN-CBs"/>
+                            <constraint firstItem="qfX-ws-WSG" firstAttribute="trailing" secondItem="5I4-aa-gvr" secondAttribute="trailing" id="uoG-Kj-O1s"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="qfX-ws-WSG" id="zyD-Bi-OSm"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="w13-Ty-hZq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="228.98550724637684" y="-281.25"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="arrow.backward" catalog="system" width="128" height="98"/>
+        <image name="arrow.forward" catalog="system" width="128" height="98"/>
+        <image name="doc.on.doc.fill" catalog="system" width="116" height="128"/>
+        <image name="plus.circle.fill" catalog="system" width="128" height="121"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGreenColor">
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
 </document>
