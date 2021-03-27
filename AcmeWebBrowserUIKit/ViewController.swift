@@ -92,6 +92,7 @@ class ViewController: UIViewController, WKNavigationDelegate, UITextFieldDelegat
     }
     
     func getWebView(at index: Int) -> WKWebView {
+        print(index)
         return tabs[index].webView
     }
     
@@ -113,6 +114,10 @@ class ViewController: UIViewController, WKNavigationDelegate, UITextFieldDelegat
         performSegue(withIdentifier: "showTabs", sender: self)
     }
     
+    @IBAction func refresh(_ sender: Any) {
+        tabs[currentTabIndex].webView.reload()
+    }
+    
     func addTabFromTabView(tab: Tab) {
         self.tabs.append(tab)
         switchTab(to: tabs.count - 1)
@@ -130,6 +135,8 @@ class ViewController: UIViewController, WKNavigationDelegate, UITextFieldDelegat
             }
             removeCurrentPage()
             switchTab(to: currentTabIndex)
+        } else {
+            currentTabIndex -= 1
         }
     }
     
