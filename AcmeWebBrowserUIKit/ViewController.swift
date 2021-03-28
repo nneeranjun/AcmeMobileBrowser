@@ -11,27 +11,6 @@ import WebKit
 //TODO: Make sure back, forward works when error page is loaded
 //TODO: Handle empty tab list
 
-enum TabType {
-    case normal
-    case error
-    case newTab
-}
-
-class Tab {
-    var url: String
-    var webView: WKWebView = WKWebView()
-    var type: TabType
-    
-    init(url: String, type: TabType) {
-        self.url = url
-        self.type = type
-    }
-    
-    var description : String {
-        "Tab : url : `\(url) - webView : `\(webView)` - type : `\(type)`"
-    }
-}
-
 class ViewController: UIViewController, WKNavigationDelegate, UITextFieldDelegate {
     
     @IBOutlet weak var webViewContainer: UIView!
