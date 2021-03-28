@@ -28,9 +28,7 @@ class Tab {
     }
     
     var description : String {
-        get {
-            return "Tab : url : `\(url) - webView : `\(webView)` - type : `\(type)`"
-        }
+        "Tab : url : `\(url) - webView : `\(webView)` - type : `\(type)`"
     }
 }
 
@@ -41,6 +39,8 @@ class ViewController: UIViewController, WKNavigationDelegate, UITextFieldDelegat
     
     private let errorPage = ErrorPage()
     private let newTabPage = NewTabPage()
+    
+    private let invalidURLAlert = UIAlertController(title: "Invalid URL format", message: "Please enter a valid formatted URL", preferredStyle: UIAlertController.Style.alert)
     
     private var currentTabIndex: Int = 0
     
@@ -76,6 +76,17 @@ class ViewController: UIViewController, WKNavigationDelegate, UITextFieldDelegat
         currentWebView.bindFrameToSuperviewBounds()
         
         searchBar.clearButtonMode = .whileEditing
+        
+        invalidURLAlert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+    }
+    
+    func validateURL(url: String) -> Bool {
+        guard let URL = URL(string: url), UIApplication.shared.canOpenURL(URL) else {
+            view.bringSubviewToFront(invalidURLAlert.view)
+            present(invalidURLAlert, animated: true, completion: nil)
+            return false
+        }
+        return true
     }
     
     func getTabWith(webView: WKWebView) -> Tab? {
@@ -87,44 +98,48 @@ class ViewController: UIViewController, WKNavigationDelegate, UITextFieldDelegat
         return nil
     }
     
+    func updateSearchAndTabURL(updatedURL: String, tab: Tab) {
+        tab.url = updatedURL
+        if tabs[currentTabIndex].webView.isEqual(tab.webView) {
+            searchBar.text = updatedURL
+        }
+    }
+    
     //Once we have started navigating, set the search bar and current tab url
     func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
+        let urlString = webView.url?.absoluteString ?? ""
         let usedTab = getTabWith(webView: webView)
-        usedTab!.url = webView.url!.absoluteString
         
-        if tabs[currentTabIndex].webView.isEqual(usedTab!.webView) {
-            searchBar.text = webView.url?.absoluteString
-        }
-        
+        updateSearchAndTabURL(updatedURL: urlString, tab: usedTab!)
         usedTab?.type = .normal
     }
     
     //Once we have finished navigating, we know we did not hit an error, so set our type to normal and switch to our new tab
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        let urlString = webView.url?.absoluteString ?? ""
         let usedTab = getTabWith(webView: webView)
         
-        usedTab!.url = webView.url!.absoluteString
-        if tabs[currentTabIndex].webView.isEqual(usedTab!.webView) {
-            searchBar.text = webView.url?.absoluteString
-        }
-        
-        usedTab!.type = .normal
+        updateSearchAndTabURL(updatedURL: urlString, tab: usedTab!)
+        usedTab?.type = .normal
     }
     
     //If we encounter an error in navigating, remove the current page and transition to the error page. We also need to set the current tab to type error
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
         removeCurrentPage()
         loadErrorPage()
-        
         let usedTab = getTabWith(webView: webView)
         usedTab!.type = .error
     }
     
     //If the user clicks search, then load the webpage and close the keyboard
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if !validateURL(url: textField.text!) {
+            return true
+        }
+        
         let tab = tabs[currentTabIndex]
-        tab.url = textField.text!
-        loadPageWithinCurrentTab(url: textField.text ?? "")
+        tab.url = textField.text ?? ""
+        loadPageWithinCurrentTab(url: tab.url)
         return true
     }
     
@@ -183,7 +198,7 @@ class ViewController: UIViewController, WKNavigationDelegate, UITextFieldDelegat
     //removes the current tab being presented
     func removeCurrentPage() {
         let currTab = tabs[currentTabIndex]
-        print("removing \(currTab.type)")
+        
         switch currTab.type {
         case .normal:
             currTab.webView.removeFromSuperview()
@@ -209,7 +224,6 @@ class ViewController: UIViewController, WKNavigationDelegate, UITextFieldDelegat
     
     func switchTab(to index: Int) {
         let newTab = tabs[index]
-        print("switching to \(newTab.type)")
         
         //remove the current tab being displayed
         removeCurrentPage()
@@ -238,7 +252,8 @@ class ViewController: UIViewController, WKNavigationDelegate, UITextFieldDelegat
     
     func loadPageWithinCurrentTab(url: String) {
         let currTab = tabs[currentTabIndex]
-        let request = URLRequest(url: URL(string: url)!)
+        guard let urlString = URL(string: url) else { return }
+        let request = URLRequest(url: urlString)
 
         currTab.webView.load(request)
         
@@ -269,9 +284,7 @@ class ViewController: UIViewController, WKNavigationDelegate, UITextFieldDelegat
 
 extension UIView {
     func bindFrameToSuperviewBounds() {
-        guard let superview = self.superview else {
-            return
-        }
+        guard let superview = self.superview else { return}
 
         self.translatesAutoresizingMaskIntoConstraints = false
         self.topAnchor.constraint(equalTo: superview.topAnchor, constant: 0).isActive = true
