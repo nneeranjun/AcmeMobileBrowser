@@ -119,6 +119,8 @@ class ViewController: UIViewController, WKNavigationDelegate, UITextFieldDelegat
         let tab = tabs[currentTabIndex]
         tab.url = textField.text ?? ""
         loadPageWithinCurrentTab(url: tab.url)
+        searchBar.resignFirstResponder()
+        
         return true
     }
     
@@ -147,31 +149,49 @@ class ViewController: UIViewController, WKNavigationDelegate, UITextFieldDelegat
     }
     
     @IBAction func refresh(_ sender: Any) {
-        tabs[currentTabIndex].webView.reload()
+        let currTab = tabs[currentTabIndex]
+        
+        if currTab.type != .newTab {
+            if currTab.type == .error {
+                loadPageWithinCurrentTab(url: currTab.url)
+            } else {
+                currTab.webView.reload()
+            }
+        }
     }
     
-    //Add a new tab, switch to it, then load it
+    
+    //Add a new tab, switch to it
     func addNewTab(_ tab: Tab) {
         self.tabs.append(tab)
         switchTab(to: tabs.count - 1)
         tab.webView.navigationDelegate = self
     }
     
-    func deleteTab(at index: Int) {
+    /**
+     return: Whether or not to dismiss the modal tab presenter
+     */
+    func deleteTab(at index: Int) -> Bool {
         //delete tab
-        tabs.remove(at: index)
-        //this probably doesn't work
+        
         if index == currentTabIndex {
-            if tabs.isEmpty {
-                //handle if empty case
-            } else {
-                currentTabIndex = 0
-            }
             removeCurrentPage()
-            switchTab(to: currentTabIndex)
         } else {
             currentTabIndex -= 1
         }
+        
+        tabs.remove(at: index)
+        
+        if tabs.isEmpty {
+            let emptyTab = Tab(url: "Empty Tab", type: .newTab)
+            addNewTab(emptyTab)
+            return true
+        } else {
+            currentTabIndex = 0
+            switchTab(to: currentTabIndex)
+            return false
+        }
+        
     }
     
     //removes the current tab being presented

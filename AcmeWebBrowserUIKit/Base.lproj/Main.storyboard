@@ -18,7 +18,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hXb-Ck-FLR">
-                                <rect key="frame" x="20" y="54" width="374" height="34"/>
+                                <rect key="frame" x="20" y="54" width="328" height="34"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="328" id="PcH-pp-9sP"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
@@ -59,19 +62,31 @@
                                     </button>
                                 </subviews>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cc5-B7-kCL">
+                                <rect key="frame" x="368" y="57.5" width="26" height="27"/>
+                                <state key="normal">
+                                    <imageReference key="image" image="gobackward" catalog="system" symbolScale="large"/>
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="bold"/>
+                                </state>
+                                <connections>
+                                    <action selector="refresh:" destination="BYZ-38-t0r" eventType="touchUpInside" id="mXk-sz-zZD"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="hXb-Ck-FLR" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="1Lq-Mz-Htz"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="cc5-B7-kCL" secondAttribute="trailing" constant="20" id="AQE-EG-s4W"/>
+                            <constraint firstItem="VJo-qk-3gd" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="DmC-dC-JDm"/>
+                            <constraint firstItem="cc5-B7-kCL" firstAttribute="leading" secondItem="hXb-Ck-FLR" secondAttribute="trailing" constant="20" id="HXq-5i-HDC"/>
+                            <constraint firstItem="hXb-Ck-FLR" firstAttribute="centerY" secondItem="cc5-B7-kCL" secondAttribute="centerY" id="QwT-7x-oap"/>
                             <constraint firstItem="VJo-qk-3gd" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="SO1-tu-Qks"/>
-                            <constraint firstItem="VJo-qk-3gd" firstAttribute="top" secondItem="hXb-Ck-FLR" secondAttribute="bottom" constant="26" id="VgC-8m-rhf"/>
                             <constraint firstItem="VJo-qk-3gd" firstAttribute="centerX" secondItem="3FC-vu-L67" secondAttribute="centerX" id="ao7-FB-Eem"/>
                             <constraint firstAttribute="bottom" secondItem="VJo-qk-3gd" secondAttribute="bottom" constant="87" id="eCf-Mj-Y9m"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="hXb-Ck-FLR" secondAttribute="trailing" constant="20" id="mRU-Pq-11r"/>
-                            <constraint firstItem="hXb-Ck-FLR" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="10" id="neL-0u-3N7"/>
-                            <constraint firstItem="VJo-qk-3gd" firstAttribute="centerX" secondItem="hXb-Ck-FLR" secondAttribute="centerX" id="poU-AE-2oy"/>
+                            <constraint firstItem="hXb-Ck-FLR" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="10" id="eLh-TK-vB1"/>
+                            <constraint firstItem="VJo-qk-3gd" firstAttribute="top" secondItem="hXb-Ck-FLR" secondAttribute="bottom" constant="26" id="veB-mD-E5X"/>
                             <constraint firstItem="3FC-vu-L67" firstAttribute="top" secondItem="VJo-qk-3gd" secondAttribute="bottom" constant="24" id="xks-v2-0aM"/>
-                            <constraint firstItem="hXb-Ck-FLR" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="yuR-qc-hvG"/>
                         </constraints>
                     </view>
                     <connections>
@@ -144,6 +159,7 @@
         <image name="arrow.backward" catalog="system" width="128" height="98"/>
         <image name="arrow.forward" catalog="system" width="128" height="98"/>
         <image name="doc.on.doc.fill" catalog="system" width="116" height="128"/>
+        <image name="gobackward" catalog="system" width="121" height="128"/>
         <image name="plus.circle.fill" catalog="system" width="128" height="121"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

@@ -17,7 +17,7 @@ class TabTableView: UIViewController, UITableViewDelegate, UITableViewDataSource
     @IBOutlet weak var tableView: UITableView!
     
     @IBAction func addNewTab(_ sender: Any) {
-        let newTab = Tab(url: "Blank Tab", type: .newTab)
+        let newTab = Tab(url: "Empty Tab", type: .newTab)
         delegate.addNewTab(newTab)
         tableView.reloadData()
         self.dismiss(animated: true, completion: nil)
@@ -54,7 +54,11 @@ class TabTableView: UIViewController, UITableViewDelegate, UITableViewDataSource
             // handle delete (by removing the data from your array and updating the tableview)
             tabs.remove(at: indexPath.row)
             self.tableView.reloadData()
-            delegate.deleteTab(at: indexPath.row)
+            
+            //delete tab and dismiss if we have no tabs left
+            if delegate.deleteTab(at: indexPath.row) {
+                dismiss(animated: true, completion: nil)
+            }
         }
     }
     

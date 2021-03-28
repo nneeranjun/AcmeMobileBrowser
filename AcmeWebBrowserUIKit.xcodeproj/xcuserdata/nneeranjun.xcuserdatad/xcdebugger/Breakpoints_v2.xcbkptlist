@@ -14,10 +14,10 @@
             filePath = "AcmeWebBrowserUIKit/ViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "206"
-            endingLineNumber = "206"
+            startingLineNumber = "226"
+            endingLineNumber = "226"
             landmarkName = "switchTab(to:)"
-            landmarkType = "7">
+            landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -30,10 +30,10 @@
             filePath = "AcmeWebBrowserUIKit/ViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "207"
-            endingLineNumber = "207"
+            startingLineNumber = "227"
+            endingLineNumber = "227"
             landmarkName = "switchTab(to:)"
-            landmarkType = "7">
+            landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -62,10 +62,10 @@
             filePath = "AcmeWebBrowserUIKit/ViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "233"
-            endingLineNumber = "233"
+            startingLineNumber = "253"
+            endingLineNumber = "253"
             landmarkName = "loadPageWithinCurrentTab(url:)"
-            landmarkType = "7">
+            landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
