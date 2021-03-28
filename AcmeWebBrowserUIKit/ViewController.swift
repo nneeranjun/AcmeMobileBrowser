@@ -87,7 +87,7 @@ class ViewController: UIViewController, WKNavigationDelegate, UITextFieldDelegat
         return nil
     }
     
-    //One we have started navigating, set the search bar and current tab url
+    //Once we have started navigating, set the search bar and current tab url
     func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
         let usedTab = getTabWith(webView: webView)
         usedTab!.url = webView.url!.absoluteString
@@ -95,13 +95,13 @@ class ViewController: UIViewController, WKNavigationDelegate, UITextFieldDelegat
         if tabs[currentTabIndex].webView.isEqual(usedTab!.webView) {
             searchBar.text = webView.url?.absoluteString
         }
+        
+        usedTab?.type = .normal
     }
     
     //Once we have finished navigating, we know we did not hit an error, so set our type to normal and switch to our new tab
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         let usedTab = getTabWith(webView: webView)
-        
-        print(usedTab?.description)
         
         usedTab!.url = webView.url!.absoluteString
         if tabs[currentTabIndex].webView.isEqual(usedTab!.webView) {
@@ -117,7 +117,7 @@ class ViewController: UIViewController, WKNavigationDelegate, UITextFieldDelegat
         loadErrorPage()
         
         let usedTab = getTabWith(webView: webView)
-        usedTab?.type = .error
+        usedTab!.type = .error
     }
     
     //If the user clicks search, then load the webpage and close the keyboard
@@ -183,6 +183,7 @@ class ViewController: UIViewController, WKNavigationDelegate, UITextFieldDelegat
     //removes the current tab being presented
     func removeCurrentPage() {
         let currTab = tabs[currentTabIndex]
+        print("removing \(currTab.type)")
         switch currTab.type {
         case .normal:
             currTab.webView.removeFromSuperview()
@@ -238,19 +239,21 @@ class ViewController: UIViewController, WKNavigationDelegate, UITextFieldDelegat
     func loadPageWithinCurrentTab(url: String) {
         let currTab = tabs[currentTabIndex]
         let request = URLRequest(url: URL(string: url)!)
+
         currTab.webView.load(request)
         
         switch currTab.type {
         case .error:
             errorPage.removeFromSuperview()
+            webViewContainer.addSubview(currTab.webView)
+            currTab.webView.bindFrameToSuperviewBounds()
         case .newTab:
             newTabPage.removeFromSuperview()
+            webViewContainer.addSubview(currTab.webView)
+            currTab.webView.bindFrameToSuperviewBounds()
         default: break
         }
-        
-        webViewContainer.addSubview(currTab.webView)
-        currTab.webView.bindFrameToSuperviewBounds()
-        
+    
         currTab.url = url
     }
     
