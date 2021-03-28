@@ -17,8 +17,8 @@ class TabTableView: UIViewController, UITableViewDelegate, UITableViewDataSource
     @IBOutlet weak var tableView: UITableView!
     
     @IBAction func addNewTab(_ sender: Any) {
-        let newTab = Tab(url: "https://yahoo.com", type: .normal)
-        delegate.addTabFromTabView(tab: newTab)
+        let newTab = Tab(url: "Blank Tab", type: .newTab)
+        delegate.addNewTab(newTab)
         tableView.reloadData()
         self.dismiss(animated: true, completion: nil)
     }

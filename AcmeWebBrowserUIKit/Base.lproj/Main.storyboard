@@ -18,18 +18,18 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hXb-Ck-FLR">
-                                <rect key="frame" x="20" y="44" width="312" height="34"/>
+                                <rect key="frame" x="20" y="54" width="374" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VJo-qk-3gd">
-                                <rect key="frame" x="0.0" y="104" width="414" height="705"/>
+                                <rect key="frame" x="0.0" y="114" width="414" height="695"/>
                             </containerView>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="68" translatesAutoresizingMaskIntoConstraints="NO" id="3FC-vu-L67">
-                                <rect key="frame" x="102" y="833" width="210" height="29"/>
+                                <rect key="frame" x="100.5" y="833" width="213" height="29"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M9R-70-8Pq">
-                                        <rect key="frame" x="0.0" y="0.0" width="22.5" height="29"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M9R-70-8Pq">
+                                        <rect key="frame" x="0.0" y="0.0" width="25.5" height="29"/>
                                         <state key="normal">
                                             <imageReference key="image" image="arrow.backward" catalog="system" symbolScale="large"/>
                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="default" weight="black"/>
@@ -38,8 +38,8 @@
                                             <action selector="goBack:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Xnf-wj-lnf"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8zI-PU-Auu">
-                                        <rect key="frame" x="90.5" y="0.0" width="26" height="29"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8zI-PU-Auu">
+                                        <rect key="frame" x="93.5" y="0.0" width="26" height="29"/>
                                         <state key="normal">
                                             <imageReference key="image" image="doc.on.doc.fill" catalog="system" symbolScale="large"/>
                                         </state>
@@ -47,8 +47,8 @@
                                             <action selector="showTabs:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ml6-Eg-i1l"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dSk-OF-9cv">
-                                        <rect key="frame" x="184.5" y="0.0" width="25.5" height="29"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dSk-OF-9cv">
+                                        <rect key="frame" x="187.5" y="0.0" width="25.5" height="29"/>
                                         <state key="normal">
                                             <imageReference key="image" image="arrow.forward" catalog="system" symbolScale="large"/>
                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" weight="black"/>
@@ -59,33 +59,19 @@
                                     </button>
                                 </subviews>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KJT-bL-wnc">
-                                <rect key="frame" x="358.5" y="47" width="26.5" height="28"/>
-                                <state key="normal" image="gobackward" catalog="system">
-                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="black"/>
-                                </state>
-                                <connections>
-                                    <action selector="refresh:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ljt-Sw-ySu"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="hXb-Ck-FLR" firstAttribute="centerX" secondItem="VJo-qk-3gd" secondAttribute="centerX" constant="-31" id="11k-rj-4y4"/>
-                            <constraint firstItem="3FC-vu-L67" firstAttribute="top" secondItem="VJo-qk-3gd" secondAttribute="bottom" constant="24" id="88W-a2-wv6"/>
-                            <constraint firstItem="KJT-bL-wnc" firstAttribute="leading" secondItem="hXb-Ck-FLR" secondAttribute="trailing" constant="26.5" id="B9K-au-fjv"/>
-                            <constraint firstItem="VJo-qk-3gd" firstAttribute="top" secondItem="hXb-Ck-FLR" secondAttribute="bottom" constant="26" id="ECg-ne-zJh"/>
-                            <constraint firstItem="hXb-Ck-FLR" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" constant="-62" id="I7o-TZ-nh5"/>
-                            <constraint firstItem="3FC-vu-L67" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="S84-sL-0lX"/>
-                            <constraint firstItem="hXb-Ck-FLR" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Vow-hJ-EMQ"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="3FC-vu-L67" secondAttribute="trailing" constant="102" id="W2R-OZ-ux1"/>
-                            <constraint firstItem="VJo-qk-3gd" firstAttribute="top" secondItem="KJT-bL-wnc" secondAttribute="bottom" constant="29" id="bNJ-bO-jz2"/>
-                            <constraint firstItem="hXb-Ck-FLR" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="bal-6c-SsH"/>
-                            <constraint firstItem="VJo-qk-3gd" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="l14-PE-DoB"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="KJT-bL-wnc" secondAttribute="trailing" constant="29" id="qsg-YI-tsK"/>
-                            <constraint firstItem="KJT-bL-wnc" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="3" id="tiE-nH-dwr"/>
-                            <constraint firstItem="3FC-vu-L67" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="102" id="u7u-Fa-SXA"/>
+                            <constraint firstItem="VJo-qk-3gd" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="SO1-tu-Qks"/>
+                            <constraint firstItem="VJo-qk-3gd" firstAttribute="top" secondItem="hXb-Ck-FLR" secondAttribute="bottom" constant="26" id="VgC-8m-rhf"/>
+                            <constraint firstItem="VJo-qk-3gd" firstAttribute="centerX" secondItem="3FC-vu-L67" secondAttribute="centerX" id="ao7-FB-Eem"/>
+                            <constraint firstAttribute="bottom" secondItem="VJo-qk-3gd" secondAttribute="bottom" constant="87" id="eCf-Mj-Y9m"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="hXb-Ck-FLR" secondAttribute="trailing" constant="20" id="mRU-Pq-11r"/>
+                            <constraint firstItem="hXb-Ck-FLR" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="10" id="neL-0u-3N7"/>
+                            <constraint firstItem="VJo-qk-3gd" firstAttribute="centerX" secondItem="hXb-Ck-FLR" secondAttribute="centerX" id="poU-AE-2oy"/>
+                            <constraint firstItem="3FC-vu-L67" firstAttribute="top" secondItem="VJo-qk-3gd" secondAttribute="bottom" constant="24" id="xks-v2-0aM"/>
+                            <constraint firstItem="hXb-Ck-FLR" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="yuR-qc-hvG"/>
                         </constraints>
                     </view>
                     <connections>
@@ -158,7 +144,6 @@
         <image name="arrow.backward" catalog="system" width="128" height="98"/>
         <image name="arrow.forward" catalog="system" width="128" height="98"/>
         <image name="doc.on.doc.fill" catalog="system" width="116" height="128"/>
-        <image name="gobackward" catalog="system" width="121" height="128"/>
         <image name="plus.circle.fill" catalog="system" width="128" height="121"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
