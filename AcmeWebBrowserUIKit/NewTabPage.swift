@@ -15,6 +15,7 @@ class NewTabPage: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
+        message.textAlignment = .center
         message.lineBreakMode = .byWordWrapping
         message.numberOfLines = 0
         addSubview(message)

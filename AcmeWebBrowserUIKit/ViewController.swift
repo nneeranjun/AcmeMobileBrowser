@@ -149,8 +149,17 @@ class ViewController: UIViewController, WKNavigationDelegate, UITextFieldDelegat
     }
     
     @IBAction func refresh(_ sender: Any) {
-        tabs[currentTabIndex].webView.reload()
+        let currTab = tabs[currentTabIndex]
+        
+        if currTab.type != .newTab {
+            if currTab.type == .error {
+                loadPageWithinCurrentTab(url: currTab.url)
+            } else {
+                currTab.webView.reload()
+            }
+        }
     }
+    
     
     //Add a new tab, switch to it
     func addNewTab(_ tab: Tab) {

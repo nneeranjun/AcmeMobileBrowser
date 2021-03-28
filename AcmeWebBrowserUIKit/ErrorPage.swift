@@ -15,6 +15,7 @@ class ErrorPage: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
+        errorMessage.textAlignment = .center
         errorMessage.lineBreakMode = .byWordWrapping
         errorMessage.numberOfLines = 0
         addSubview(errorMessage)
