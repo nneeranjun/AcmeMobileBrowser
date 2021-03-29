@@ -10,7 +10,6 @@ import WebKit
 
 enum TabType {
     case normal
-    case error
     case newTab
 }
 
