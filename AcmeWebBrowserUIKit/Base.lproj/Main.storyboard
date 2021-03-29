@@ -28,8 +28,18 @@
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VJo-qk-3gd">
                                 <rect key="frame" x="0.0" y="114" width="414" height="695"/>
                             </containerView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cc5-B7-kCL">
+                                <rect key="frame" x="368" y="57.5" width="26" height="27"/>
+                                <state key="normal">
+                                    <imageReference key="image" image="gobackward" catalog="system" symbolScale="large"/>
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="bold"/>
+                                </state>
+                                <connections>
+                                    <action selector="refresh:" destination="BYZ-38-t0r" eventType="touchUpInside" id="mXk-sz-zZD"/>
+                                </connections>
+                            </button>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="68" translatesAutoresizingMaskIntoConstraints="NO" id="3FC-vu-L67">
-                                <rect key="frame" x="100.5" y="833" width="213" height="29"/>
+                                <rect key="frame" x="53.5" y="833" width="307.5" height="29"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M9R-70-8Pq">
                                         <rect key="frame" x="0.0" y="0.0" width="25.5" height="29"/>
@@ -50,8 +60,14 @@
                                             <action selector="showTabs:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ml6-Eg-i1l"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mp8-P8-cUG">
+                                        <rect key="frame" x="187.5" y="0.0" width="26.5" height="29"/>
+                                        <state key="normal" image="qrcode.viewfinder" catalog="system">
+                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="black"/>
+                                        </state>
+                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dSk-OF-9cv">
-                                        <rect key="frame" x="187.5" y="0.0" width="25.5" height="29"/>
+                                        <rect key="frame" x="282" y="0.0" width="25.5" height="29"/>
                                         <state key="normal">
                                             <imageReference key="image" image="arrow.forward" catalog="system" symbolScale="large"/>
                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" weight="black"/>
@@ -62,16 +78,6 @@
                                     </button>
                                 </subviews>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cc5-B7-kCL">
-                                <rect key="frame" x="368" y="57.5" width="26" height="27"/>
-                                <state key="normal">
-                                    <imageReference key="image" image="gobackward" catalog="system" symbolScale="large"/>
-                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="bold"/>
-                                </state>
-                                <connections>
-                                    <action selector="refresh:" destination="BYZ-38-t0r" eventType="touchUpInside" id="mXk-sz-zZD"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -161,6 +167,7 @@
         <image name="doc.on.doc.fill" catalog="system" width="116" height="128"/>
         <image name="gobackward" catalog="system" width="121" height="128"/>
         <image name="plus.circle.fill" catalog="system" width="128" height="121"/>
+        <image name="qrcode.viewfinder" catalog="system" width="128" height="115"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
