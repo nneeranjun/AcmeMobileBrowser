@@ -13,7 +13,7 @@ class TabTableView: UIViewController, UITableViewDelegate, UITableViewDataSource
     
     weak var delegate: ViewController!
     var tabs: [Tab] = []
-    let cellReuseIdentifier = "cell"
+
     @IBOutlet weak var tableView: UITableView!
     
     @IBAction func addNewTab(_ sender: Any) {
