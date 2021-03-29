@@ -66,12 +66,13 @@ class ViewController: UIViewController, WKNavigationDelegate, UITextFieldDelegat
     }
     
     func validateURL(url: String) -> Bool {
-        guard let URL = URL(string: url), UIApplication.shared.canOpenURL(URL) else {
-            view.bringSubviewToFront(invalidURLAlert.view)
-            present(invalidURLAlert, animated: true, completion: nil)
-            return false
+        if let URL = URL(string: url), UIApplication.shared.canOpenURL(URL) {
+            return true
         }
-        return true
+        
+        view.bringSubviewToFront(invalidURLAlert.view)
+        present(invalidURLAlert, animated: true, completion: nil)
+        return false
     }
     
     func getTabContaining(webView: WKWebView) -> Tab? {
@@ -123,15 +124,15 @@ class ViewController: UIViewController, WKNavigationDelegate, UITextFieldDelegat
     }
     
     //If the user clicks search, then load the webpage and close the keyboard
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool { 
         searchBar.resignFirstResponder()
-
+        
         if validateURL(url: textField.text!) {
             let tab = tabs[currentTabIndex]
             tab.url = textField.text ?? ""
             loadPageWithinCurrentTab(url: tab.url)
         }
-
+      
         return true
     }
     

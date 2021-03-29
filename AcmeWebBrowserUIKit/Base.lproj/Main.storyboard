@@ -60,9 +60,10 @@
                                             <action selector="showTabs:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ml6-Eg-i1l"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mp8-P8-cUG">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9eb-gE-7ud">
                                         <rect key="frame" x="187.5" y="0.0" width="26.5" height="29"/>
-                                        <state key="normal" image="qrcode.viewfinder" catalog="system">
+                                        <state key="normal">
+                                            <imageReference key="image" image="qrcode.viewfinder" catalog="system" symbolScale="large"/>
                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="black"/>
                                         </state>
                                     </button>
