@@ -60,15 +60,16 @@ class ViewController: UIViewController, WKNavigationDelegate, UITextFieldDelegat
     }
     
     func validateURL(url: String) -> Bool {
-        guard let URL = URL(string: url), UIApplication.shared.canOpenURL(URL) else {
-            view.bringSubviewToFront(invalidURLAlert.view)
-            present(invalidURLAlert, animated: true, completion: nil)
-            return false
+        if let URL = URL(string: url), UIApplication.shared.canOpenURL(URL) {
+            return true
         }
-        return true
+        
+        view.bringSubviewToFront(invalidURLAlert.view)
+        present(invalidURLAlert, animated: true, completion: nil)
+        return false
     }
     
-    func getTabWith(webView: WKWebView) -> Tab? {
+    func getTabContaining(webView: WKWebView) -> Tab? {
         for tab in tabs {
             if tab.webView.isEqual(webView) {
                 return tab
@@ -87,7 +88,7 @@ class ViewController: UIViewController, WKNavigationDelegate, UITextFieldDelegat
     //Once we have started navigating, set the search bar and current tab url
     func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
         let urlString = webView.url?.absoluteString ?? ""
-        let usedTab = getTabWith(webView: webView)
+        let usedTab = getTabContaining(webView: webView)
         
         updateSearchAndTabURL(updatedURL: urlString, tab: usedTab!)
         usedTab?.type = .normal
@@ -96,7 +97,7 @@ class ViewController: UIViewController, WKNavigationDelegate, UITextFieldDelegat
     //Once we have finished navigating, we know we did not hit an error, so set our type to normal and switch to our new tab
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         let urlString = webView.url?.absoluteString ?? ""
-        let usedTab = getTabWith(webView: webView)
+        let usedTab = getTabContaining(webView: webView)
         
         updateSearchAndTabURL(updatedURL: urlString, tab: usedTab!)
         usedTab?.type = .normal
@@ -106,20 +107,19 @@ class ViewController: UIViewController, WKNavigationDelegate, UITextFieldDelegat
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
         removeCurrentPage()
         loadErrorPage()
-        let usedTab = getTabWith(webView: webView)
+        let usedTab = getTabContaining(webView: webView)
         usedTab!.type = .error
     }
     
     //If the user clicks search, then load the webpage and close the keyboard
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if !validateURL(url: textField.text!) {
-            return true
-        }
-        
-        let tab = tabs[currentTabIndex]
-        tab.url = textField.text ?? ""
-        loadPageWithinCurrentTab(url: tab.url)
         searchBar.resignFirstResponder()
+        
+        if validateURL(url: textField.text!) {
+            let tab = tabs[currentTabIndex]
+            tab.url = textField.text ?? ""
+            loadPageWithinCurrentTab(url: tab.url)
+        }
         
         return true
     }
@@ -166,6 +166,7 @@ class ViewController: UIViewController, WKNavigationDelegate, UITextFieldDelegat
         self.tabs.append(tab)
         switchTab(to: tabs.count - 1)
         tab.webView.navigationDelegate = self
+        tab.webView.allowsBackForwardNavigationGestures = true
     }
     
     /**
