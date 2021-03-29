@@ -34,7 +34,7 @@ class TabTableView: UIViewController, UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let row = UITableViewCell(style: .default, reuseIdentifier: "basicRow")
 //        let row: TabCell = self.tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier) as! TabCell
-        row.textLabel?.text = tabs[indexPath.row].url
+        row.textLabel?.text = tabs[indexPath.row].title
         row.imageView?.image = UIImage(systemName: "safari")
         return row
     }

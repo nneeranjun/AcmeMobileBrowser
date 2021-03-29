@@ -10,7 +10,6 @@ import WebKit
 
 enum TabType {
     case normal
-    case error
     case newTab
 }
 
@@ -26,5 +25,13 @@ class Tab {
     
     var description : String {
         "Tab : url : `\(url) - webView : `\(webView)` - type : `\(type)`"
+    }
+    
+    var title: String {
+        if type == .newTab {
+            return "Empty Tab"
+        } else {
+            return url
+        }
     }
 }
