@@ -49,11 +49,9 @@ extension UIView {
 
 extension String {
     var isValidURL: Bool {
-        if let URL = URL(string: self), UIApplication.shared.canOpenURL(URL) {
-            return true
-        } else {
-            return false
-        }
+        guard let url = URL(string: self), UIApplication.shared.canOpenURL(url) else { return false }
+        let urlRegEx = "(http|https)://((\\w)*|([0-9]*)|([-|_])*)+([\\.|/]((\\w)*|([0-9]*)|([-|_])*))+"
+        return NSPredicate(format: "SELF MATCHES %@", urlRegEx).evaluate(with: self)
     }
 }
 

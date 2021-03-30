@@ -129,11 +129,18 @@ class ViewController: UIViewController, WKNavigationDelegate, UISearchBarDelegat
     
     //If the user clicks search, then load the webpage and close the keyboard. If it is invalid, present an alert and reset the keyboard
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        var searchText = searchBar.text ?? ""
+        let searchText = searchBar.text ?? ""
         searchBar.setShowsCancelButton(false, animated: false)
         searchBar.resignFirstResponder()
         let tab = tabs[currentTabIndex]
         
+        if searchText == "" {
+            presentInvalidURLAlert()
+            searchBar.text = tab.url
+            return
+        }
+        
+        //allows to load urls without an explicit protocol
         let urlOptions = [searchText, "https://\(searchText)", "http://\(searchText)"]
         
         for url in urlOptions {
@@ -145,10 +152,17 @@ class ViewController: UIViewController, WKNavigationDelegate, UISearchBarDelegat
             }
         }
         
-        presentInvalidURLAlert()
-        searchBar.text = tab.url
-        return
+        //no urls work, so default to google search
+        //if there are spaces or other special characters, escape them
+        let allowedCharacters = NSCharacterSet.urlFragmentAllowed
+        guard let encodedSearchString  = searchText.addingPercentEncoding(withAllowedCharacters: allowedCharacters)  else { return }
+        let queryString = "https://www.google.com/search?q=\(encodedSearchString)"
+        
+        searchBar.isLoading = true
+        loadPageWithinCurrentTab(url: queryString)
     }
+    
+    
 
     @IBAction func goBack(_ sender: Any) {
         let webView = tabs[currentTabIndex].webView

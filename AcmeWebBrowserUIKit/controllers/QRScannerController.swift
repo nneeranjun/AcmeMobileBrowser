@@ -16,7 +16,6 @@ class QRScannerController: UIViewController, AVCaptureMetadataOutputObjectsDeleg
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("loaded")
         
         if !isCameraEnabled() {
             requestCameraAccess()
@@ -26,7 +25,6 @@ class QRScannerController: UIViewController, AVCaptureMetadataOutputObjectsDeleg
         captureSession = AVCaptureSession()
 
         guard let videoCaptureDevice = AVCaptureDevice.default(for: .video) else {
-            print("can't do video cap device")
             failed()
             return
         }
@@ -35,13 +33,13 @@ class QRScannerController: UIViewController, AVCaptureMetadataOutputObjectsDeleg
         do {
             videoInput = try AVCaptureDeviceInput(device: videoCaptureDevice)
         } catch {
+            failed()
             return
         }
 
         if (captureSession.canAddInput(videoInput)) {
             captureSession.addInput(videoInput)
         } else {
-            print("doesnt support")
             failed()
             return
         }
@@ -54,7 +52,6 @@ class QRScannerController: UIViewController, AVCaptureMetadataOutputObjectsDeleg
             metadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
             metadataOutput.metadataObjectTypes = [.qr]
         } else {
-            print("cant")
             failed()
             return
         }
@@ -107,9 +104,11 @@ class QRScannerController: UIViewController, AVCaptureMetadataOutputObjectsDeleg
         captureSession.stopRunning()
 
         if let metadataObject = metadataObjects.first {
+            let generator = UIImpactFeedbackGenerator(style: .heavy)
+            generator.impactOccurred()
+            
             guard let readableObject = metadataObject as? AVMetadataMachineReadableCodeObject else { return }
             guard let stringValue = readableObject.stringValue else { return }
-            AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
             found(code: stringValue)
         }
     }
@@ -118,6 +117,7 @@ class QRScannerController: UIViewController, AVCaptureMetadataOutputObjectsDeleg
         if code.isValidURL {
             let newTab = Tab(url: code, type: .normal)
             delegate.addNewTab(newTab)
+            delegate.searchBar.isLoading = true
             dismiss(animated: true, completion: nil)
         } else {
             let invalidQRCodeURLAlert = UIAlertController(title: "Invalid QR Code URL", message: "Please scan a QR code with a valid URL", preferredStyle: UIAlertController.Style.alert)
