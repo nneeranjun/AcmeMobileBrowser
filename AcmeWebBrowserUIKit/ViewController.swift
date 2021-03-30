@@ -32,15 +32,17 @@ class ViewController: UIViewController, WKNavigationDelegate, UISearchBarDelegat
         searchBar.autocapitalizationType = .none
         searchBar.setShowsCancelButton(false, animated: false)
         searchBar.searchTextField.clearButtonMode = .whileEditing
+        
+        //makes the search bar have no borders
         searchBar.setBackgroundImage(UIImage(), for: .any, barMetrics: UIBarMetrics.default)
     }
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        searchBar.showsCancelButton = true
+        searchBar.setShowsCancelButton(true, animated: false)
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.setShowsCancelButton(false, animated: true)
+        searchBar.setShowsCancelButton(false, animated: false)
         searchBar.text = tabs[currentTabIndex].url
         searchBar.resignFirstResponder()
     }
@@ -52,8 +54,8 @@ class ViewController: UIViewController, WKNavigationDelegate, UISearchBarDelegat
         present(invalidURLAlert, animated: true, completion: nil)
     }
     
-    func presentURLDoesNotExistAlert() {
-        let urlDoesNotExistAlert = UIAlertController(title: "URL Does Not Exist", message: "The entered domain does not exist. Please try a different one", preferredStyle: UIAlertController.Style.alert)
+    func presentURLDoesNotExistAlert(error: Error) {
+        let urlDoesNotExistAlert = UIAlertController(title: "Error Loading URL", message: "The URL could not be loaded due to the following reason: \(error.localizedDescription) Please try again!", preferredStyle: UIAlertController.Style.alert)
         urlDoesNotExistAlert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
         
         present(urlDoesNotExistAlert, animated: true, completion: nil)
@@ -77,11 +79,13 @@ class ViewController: UIViewController, WKNavigationDelegate, UISearchBarDelegat
         }
     }
     
-//    func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
-//        if vSpinner == nil {
-//            self.showSpinner(onView: self.view)
-//        }
-//    }
+    //Update the url and tab when we start navigating
+    func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
+        let urlString = webView.url?.absoluteString ?? ""
+        let usedTab = getTabContaining(webView: webView)
+        
+        updateSearchAndTabURL(updatedURL: urlString, tab: usedTab!)
+    }
     
     //Once we have finished navigating, we know we did not hit an error, so set our type to normal, update the search and tab url, switch to our new tab, and remove the loading indicator.
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
@@ -96,7 +100,7 @@ class ViewController: UIViewController, WKNavigationDelegate, UISearchBarDelegat
     //If we encounter an error in navigating, remove the loading indicator and current page and transition to the error page
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
         self.removeSpinner()
-        presentURLDoesNotExistAlert()
+        presentURLDoesNotExistAlert(error: error)
         
         let urlString = webView.url?.absoluteString ?? ""
         let usedTab = getTabContaining(webView: webView)
@@ -109,10 +113,10 @@ class ViewController: UIViewController, WKNavigationDelegate, UISearchBarDelegat
         }
     }
     
-    //If the user clicks search, then load the webpage and close the keyboard. If it is invalid, present an alert
+    //If the user clicks search, then load the webpage and close the keyboard. If it is invalid, present an alert and reset the keyboard
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         let searchText = searchBar.text ?? ""
-        searchBar.setShowsCancelButton(false, animated: true)
+        searchBar.setShowsCancelButton(false, animated: false)
         searchBar.resignFirstResponder()
         
         if searchText.isValidURL {
@@ -122,6 +126,7 @@ class ViewController: UIViewController, WKNavigationDelegate, UISearchBarDelegat
             loadPageWithinCurrentTab(url: tab.url)
         } else {
             presentInvalidURLAlert()
+            searchBar.text = tabs[currentTabIndex].url
         }
     }
 
@@ -195,24 +200,6 @@ class ViewController: UIViewController, WKNavigationDelegate, UISearchBarDelegat
         
     }
     
-    //removes the current tab being presented
-    func removeCurrentPage() {
-        let currTab = tabs[currentTabIndex]
-        
-        switch currTab.type {
-        case .normal:
-            currTab.webView.removeFromSuperview()
-        case .newTab:
-            newTabPage.removeFromSuperview()
-        }
-    }
-    
-    //loads the new tab page
-    func loadNewTabPage() {
-        webViewContainer.addSubview(newTabPage)
-        newTabPage.bindFrameToSuperviewBounds()
-    }
-    
     //switces to the tab at given index
     func switchTab(to index: Int) {
         let newTab = tabs[index]
@@ -235,6 +222,12 @@ class ViewController: UIViewController, WKNavigationDelegate, UISearchBarDelegat
         currentTabIndex = index
     }
     
+    //loads the new tab page
+    func loadNewTabPage() {
+        webViewContainer.addSubview(newTabPage)
+        newTabPage.bindFrameToSuperviewBounds()
+    }
+    
     //loads new page within current tab
     func loadPageWithinCurrentTab(url: String) {
         
@@ -248,6 +241,18 @@ class ViewController: UIViewController, WKNavigationDelegate, UISearchBarDelegat
             newTabPage.removeFromSuperview()
             webViewContainer.addSubview(currTab.webView)
             currTab.webView.bindFrameToSuperviewBounds()
+        }
+    }
+    
+    //removes the current tab being presented
+    func removeCurrentPage() {
+        let currTab = tabs[currentTabIndex]
+        
+        switch currTab.type {
+        case .normal:
+            currTab.webView.removeFromSuperview()
+        case .newTab:
+            newTabPage.removeFromSuperview()
         }
     }
     

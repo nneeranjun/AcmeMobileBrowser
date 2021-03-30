@@ -31,8 +31,12 @@
                                     <action selector="refresh:" destination="BYZ-38-t0r" eventType="touchUpInside" id="mXk-sz-zZD"/>
                                 </connections>
                             </button>
+                            <searchBar contentMode="redraw" placeholder="Enter URL" translatesAutoresizingMaskIntoConstraints="NO" id="4il-cI-yCg">
+                                <rect key="frame" x="0.0" y="43" width="376" height="56"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="68" translatesAutoresizingMaskIntoConstraints="NO" id="3FC-vu-L67">
-                                <rect key="frame" x="53.5" y="833" width="307.5" height="29"/>
+                                <rect key="frame" x="54" y="833" width="307.5" height="29"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9eb-gE-7ud">
                                         <rect key="frame" x="0.0" y="0.0" width="26.5" height="29"/>
@@ -79,10 +83,6 @@
                                     </button>
                                 </subviews>
                             </stackView>
-                            <searchBar contentMode="redraw" placeholder="Enter URL" translatesAutoresizingMaskIntoConstraints="NO" id="4il-cI-yCg">
-                                <rect key="frame" x="0.0" y="43" width="361" height="56"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </searchBar>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -90,11 +90,11 @@
                             <constraint firstItem="4il-cI-yCg" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="5gH-3K-Mys"/>
                             <constraint firstItem="VJo-qk-3gd" firstAttribute="top" secondItem="cc5-B7-kCL" secondAttribute="bottom" constant="29" id="BMm-vW-gCX"/>
                             <constraint firstItem="VJo-qk-3gd" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="DmC-dC-JDm"/>
-                            <constraint firstItem="cc5-B7-kCL" firstAttribute="leading" secondItem="4il-cI-yCg" secondAttribute="trailing" constant="15" id="NTi-3w-MSF"/>
+                            <constraint firstItem="cc5-B7-kCL" firstAttribute="leading" secondItem="4il-cI-yCg" secondAttribute="trailing" id="NTi-3w-MSF"/>
                             <constraint firstItem="VJo-qk-3gd" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="SO1-tu-Qks"/>
                             <constraint firstItem="cc5-B7-kCL" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="14" id="Xx5-mM-5IH"/>
                             <constraint firstItem="VJo-qk-3gd" firstAttribute="centerX" secondItem="3FC-vu-L67" secondAttribute="centerX" id="ao7-FB-Eem"/>
-                            <constraint firstItem="cc5-B7-kCL" firstAttribute="leading" secondItem="4il-cI-yCg" secondAttribute="trailing" constant="15" id="che-LC-1CX"/>
+                            <constraint firstItem="cc5-B7-kCL" firstAttribute="leading" secondItem="4il-cI-yCg" secondAttribute="trailing" id="che-LC-1CX"/>
                             <constraint firstAttribute="bottom" secondItem="VJo-qk-3gd" secondAttribute="bottom" constant="87" id="eCf-Mj-Y9m"/>
                             <constraint firstItem="4il-cI-yCg" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="-1" id="em9-Xc-Rid"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="cc5-B7-kCL" secondAttribute="trailing" constant="12.5" id="sdV-jE-LDo"/>
