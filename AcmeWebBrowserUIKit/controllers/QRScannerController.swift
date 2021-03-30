@@ -104,16 +104,15 @@ class QRScannerController: UIViewController, AVCaptureMetadataOutputObjectsDeleg
         captureSession.stopRunning()
 
         if let metadataObject = metadataObjects.first {
-            let generator = UIImpactFeedbackGenerator(style: .heavy)
-            generator.impactOccurred()
-            
             guard let readableObject = metadataObject as? AVMetadataMachineReadableCodeObject else { return }
             guard let stringValue = readableObject.stringValue else { return }
             found(code: stringValue)
         }
     }
 
+    //logic when scan is completed successfully
     func found(code: String) {
+        //if url is valid, add the tab and navigate back
         if code.isValidURL {
             let newTab = Tab(url: code, type: .normal)
             delegate.addNewTab(newTab)
@@ -121,11 +120,14 @@ class QRScannerController: UIViewController, AVCaptureMetadataOutputObjectsDeleg
             dismiss(animated: true, completion: nil)
         } else {
             let invalidQRCodeURLAlert = UIAlertController(title: "Invalid QR Code URL", message: "Please scan a QR code with a valid URL", preferredStyle: UIAlertController.Style.alert)
+            
             invalidQRCodeURLAlert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: { [self] _ in
+                //if our camera is not on, start it
                 if (!(captureSession?.isRunning ?? false)) {
                     captureSession.startRunning()
                 }
             }))
+            
             present(invalidQRCodeURLAlert, animated: true, completion: nil)
         }
     }
