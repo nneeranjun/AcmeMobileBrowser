@@ -30,6 +30,7 @@
                             </containerView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cc5-B7-kCL">
                                 <rect key="frame" x="368" y="57.5" width="26" height="27"/>
+                                <color key="tintColor" red="0.25490196079999999" green="0.35294117650000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal">
                                     <imageReference key="image" image="gobackward" catalog="system" symbolScale="large"/>
                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="bold"/>
@@ -41,8 +42,30 @@
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="68" translatesAutoresizingMaskIntoConstraints="NO" id="3FC-vu-L67">
                                 <rect key="frame" x="53.5" y="833" width="307.5" height="29"/>
                                 <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9eb-gE-7ud">
+                                        <rect key="frame" x="0.0" y="0.0" width="26.5" height="29"/>
+                                        <color key="tintColor" red="0.25490196078431371" green="0.3529411764705882" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal">
+                                            <imageReference key="image" image="qrcode.viewfinder" catalog="system" symbolScale="large"/>
+                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="black"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="showScanner:" destination="BYZ-38-t0r" eventType="touchUpInside" id="c6e-ih-h2z"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8zI-PU-Auu">
+                                        <rect key="frame" x="94.5" y="0.0" width="26" height="29"/>
+                                        <color key="tintColor" red="0.25490196079999999" green="0.35294117650000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal">
+                                            <imageReference key="image" image="doc.on.doc.fill" catalog="system" symbolScale="large"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="showTabs:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ml6-Eg-i1l"/>
+                                        </connections>
+                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M9R-70-8Pq">
-                                        <rect key="frame" x="0.0" y="0.0" width="25.5" height="29"/>
+                                        <rect key="frame" x="188.5" y="0.0" width="25.5" height="29"/>
+                                        <color key="tintColor" red="0.25490196079999999" green="0.35294117650000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal">
                                             <imageReference key="image" image="arrow.backward" catalog="system" symbolScale="large"/>
                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="default" weight="black"/>
@@ -51,24 +74,9 @@
                                             <action selector="goBack:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Xnf-wj-lnf"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8zI-PU-Auu">
-                                        <rect key="frame" x="93.5" y="0.0" width="26" height="29"/>
-                                        <state key="normal">
-                                            <imageReference key="image" image="doc.on.doc.fill" catalog="system" symbolScale="large"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="showTabs:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ml6-Eg-i1l"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9eb-gE-7ud">
-                                        <rect key="frame" x="187.5" y="0.0" width="26.5" height="29"/>
-                                        <state key="normal">
-                                            <imageReference key="image" image="qrcode.viewfinder" catalog="system" symbolScale="large"/>
-                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="black"/>
-                                        </state>
-                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dSk-OF-9cv">
                                         <rect key="frame" x="282" y="0.0" width="25.5" height="29"/>
+                                        <color key="tintColor" red="0.25490196079999999" green="0.35294117650000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal">
                                             <imageReference key="image" image="arrow.forward" catalog="system" symbolScale="large"/>
                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" weight="black"/>
@@ -84,10 +92,9 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="hXb-Ck-FLR" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="1Lq-Mz-Htz"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="cc5-B7-kCL" secondAttribute="trailing" constant="20" id="AQE-EG-s4W"/>
+                            <constraint firstItem="cc5-B7-kCL" firstAttribute="centerY" secondItem="hXb-Ck-FLR" secondAttribute="centerY" id="8fL-vJ-T6x"/>
                             <constraint firstItem="VJo-qk-3gd" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="DmC-dC-JDm"/>
-                            <constraint firstItem="cc5-B7-kCL" firstAttribute="leading" secondItem="hXb-Ck-FLR" secondAttribute="trailing" constant="20" id="HXq-5i-HDC"/>
-                            <constraint firstItem="hXb-Ck-FLR" firstAttribute="centerY" secondItem="cc5-B7-kCL" secondAttribute="centerY" id="QwT-7x-oap"/>
+                            <constraint firstItem="cc5-B7-kCL" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="O4U-Ou-X9H"/>
                             <constraint firstItem="VJo-qk-3gd" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="SO1-tu-Qks"/>
                             <constraint firstItem="VJo-qk-3gd" firstAttribute="centerX" secondItem="3FC-vu-L67" secondAttribute="centerX" id="ao7-FB-Eem"/>
                             <constraint firstAttribute="bottom" secondItem="VJo-qk-3gd" secondAttribute="bottom" constant="87" id="eCf-Mj-Y9m"/>
@@ -100,6 +107,7 @@
                         <outlet property="searchBar" destination="hXb-Ck-FLR" id="7Zp-Eh-xuY"/>
                         <outlet property="webViewContainer" destination="VJo-qk-3gd" id="t0j-yw-YA3"/>
                         <segue destination="QUC-ih-19A" kind="presentation" identifier="showTabs" id="G0p-SA-3v8"/>
+                        <segue destination="Ylg-NW-1HN" kind="presentation" identifier="showScanner" id="eaw-rd-LyJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -142,14 +150,14 @@
                         <viewLayoutGuide key="safeArea" id="5I4-aa-gvr"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="zHO-mK-tJ6" firstAttribute="top" secondItem="gmD-5S-qWd" secondAttribute="top" id="0SU-mj-jIF"/>
                             <constraint firstAttribute="bottom" secondItem="qfX-ws-WSG" secondAttribute="bottom" id="4Kv-Y1-S12"/>
-                            <constraint firstItem="zHO-mK-tJ6" firstAttribute="top" secondItem="5I4-aa-gvr" secondAttribute="top" constant="20" id="76O-wh-KD5"/>
                             <constraint firstItem="qfX-ws-WSG" firstAttribute="top" secondItem="gmD-5S-qWd" secondAttribute="bottom" constant="20" id="DDc-eC-rvE"/>
+                            <constraint firstItem="gmD-5S-qWd" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="zHO-mK-tJ6" secondAttribute="trailing" constant="8" symbolic="YES" id="KYK-KW-KCz"/>
                             <constraint firstItem="5I4-aa-gvr" firstAttribute="trailing" secondItem="gmD-5S-qWd" secondAttribute="trailing" constant="28" id="LJ3-5G-X3v"/>
-                            <constraint firstItem="zHO-mK-tJ6" firstAttribute="leading" secondItem="5I4-aa-gvr" secondAttribute="leading" constant="20" id="LRV-9d-dGh"/>
                             <constraint firstItem="qfX-ws-WSG" firstAttribute="leading" secondItem="5I4-aa-gvr" secondAttribute="leading" id="VeN-qn-3Nn"/>
+                            <constraint firstItem="zHO-mK-tJ6" firstAttribute="leading" secondItem="moG-Lv-1n9" secondAttribute="leadingMargin" id="lqg-lG-QYe"/>
                             <constraint firstItem="gmD-5S-qWd" firstAttribute="top" secondItem="5I4-aa-gvr" secondAttribute="top" constant="20" id="o0k-wR-c7e"/>
-                            <constraint firstItem="gmD-5S-qWd" firstAttribute="leading" secondItem="zHO-mK-tJ6" secondAttribute="trailing" constant="290" id="omc-LN-CBs"/>
                             <constraint firstItem="qfX-ws-WSG" firstAttribute="trailing" secondItem="5I4-aa-gvr" secondAttribute="trailing" id="uoG-Kj-O1s"/>
                         </constraints>
                     </view>
@@ -159,7 +167,22 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w13-Ty-hZq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="228.98550724637684" y="-281.25"/>
+            <point key="canvasLocation" x="512" y="-616"/>
+        </scene>
+        <!--Scanner-->
+        <scene sceneID="aWh-gv-jJC">
+            <objects>
+                <viewController id="Ylg-NW-1HN" customClass="QRScanner" customModule="AcmeWebBrowserUIKit" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="KLy-Z2-g3a">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="VVO-is-vSn"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Tlm-AM-lIu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="512" y="188"/>
         </scene>
     </scenes>
     <resources>

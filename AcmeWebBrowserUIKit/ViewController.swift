@@ -56,23 +56,22 @@ class ViewController: UIViewController, WKNavigationDelegate, UITextFieldDelegat
         
         searchBar.clearButtonMode = .whileEditing
         
-        invalidURLAlert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: { [self] _ in
-            searchBar.becomeFirstResponder()
-        }))
+        invalidURLAlert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
         
-        urlDoesNotExistAlert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: { [self] _ in
-            searchBar.becomeFirstResponder()
-        }))
+        urlDoesNotExistAlert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
     }
     
     func validateURL(url: String) -> Bool {
         if let URL = URL(string: url), UIApplication.shared.canOpenURL(URL) {
             return true
+        } else {
+            return false
         }
-        
+    }
+    
+    func presentInvalidURLAlert() {
         view.bringSubviewToFront(invalidURLAlert.view)
         present(invalidURLAlert, animated: true, completion: nil)
-        return false
     }
     
     func getTabContaining(webView: WKWebView) -> Tab? {
@@ -131,8 +130,10 @@ class ViewController: UIViewController, WKNavigationDelegate, UITextFieldDelegat
             let tab = tabs[currentTabIndex]
             tab.url = textField.text ?? ""
             loadPageWithinCurrentTab(url: tab.url)
+        } else {
+            presentInvalidURLAlert()
         }
-      
+        
         return true
     }
     
@@ -168,6 +169,9 @@ class ViewController: UIViewController, WKNavigationDelegate, UITextFieldDelegat
         }
     }
     
+    @IBAction func showScanner(_ sender: Any) {
+        performSegue(withIdentifier: "showScanner", sender: self)
+    }
     
     //Add a new tab, switch to it
     func addNewTab(_ tab: Tab) {
@@ -175,6 +179,10 @@ class ViewController: UIViewController, WKNavigationDelegate, UITextFieldDelegat
         switchTab(to: tabs.count - 1)
         tab.webView.navigationDelegate = self
         tab.webView.allowsBackForwardNavigationGestures = true
+        if tab.type == .normal {
+            let request = URLRequest(url: URL(string: tab.url)!)
+            tab.webView.load(request)
+        }
     }
     
     /**
@@ -227,8 +235,6 @@ class ViewController: UIViewController, WKNavigationDelegate, UITextFieldDelegat
         //remove the current tab being displayed
         removeCurrentPage()
         
-        //load the new tab based on its type
-        print(newTab.type)
         switch newTab.type {
         case .normal:
             newTab.webView.navigationDelegate = self
@@ -239,7 +245,6 @@ class ViewController: UIViewController, WKNavigationDelegate, UITextFieldDelegat
         case .newTab:
             loadNewTabPage()
             searchBar.text = ""
-            searchBar.becomeFirstResponder()
         }
         
         //set the current tab index
@@ -269,6 +274,10 @@ class ViewController: UIViewController, WKNavigationDelegate, UITextFieldDelegat
             let controller = segue.destination as! TabTableView
             controller.delegate = self
             controller.tabs = tabs
+            controller.currentTabIndex = currentTabIndex
+        } else if segue.identifier == "showScanner" {
+            let controller = segue.destination as! QRScanner
+            controller.delegate = self
         }
     }
 

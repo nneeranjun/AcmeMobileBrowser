@@ -28,7 +28,7 @@ class Tab {
     }
     
     var title: String {
-        if type == .newTab {
+        if type == .newTab || url == "" {
             return "Empty Tab"
         } else {
             return url

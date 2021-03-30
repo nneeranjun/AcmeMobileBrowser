@@ -13,17 +13,20 @@ class TabTableView: UIViewController, UITableViewDelegate, UITableViewDataSource
     
     weak var delegate: ViewController!
     var tabs: [Tab] = []
+    var currentTabIndex: Int!
 
     @IBOutlet weak var tableView: UITableView!
     
     @IBAction func addNewTab(_ sender: Any) {
-        let newTab = Tab(url: "Empty Tab", type: .newTab)
+        let newTab = Tab(url: "", type: .newTab)
         delegate.addNewTab(newTab)
         tableView.reloadData()
         self.dismiss(animated: true, completion: nil)
     }
     
     override func viewDidLoad() {
+        super.viewDidLoad()
+        
         tableView.reloadData()
     }
     
@@ -36,6 +39,9 @@ class TabTableView: UIViewController, UITableViewDelegate, UITableViewDataSource
 //        let row: TabCell = self.tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier) as! TabCell
         row.textLabel?.text = tabs[indexPath.row].title
         row.imageView?.image = UIImage(systemName: "safari")
+        if indexPath.row == currentTabIndex {
+            row.backgroundColor = .secondarySystemBackground
+        }
         return row
     }
     
@@ -61,7 +67,6 @@ class TabTableView: UIViewController, UITableViewDelegate, UITableViewDataSource
             }
         }
     }
-    
     
 }
 
