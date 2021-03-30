@@ -69,9 +69,3 @@ class TabTableView: UIViewController, UITableViewDelegate, UITableViewDataSource
     }
     
 }
-
-class TabCell: UITableViewCell {
-    @IBOutlet weak var url: UILabel!
-    @IBOutlet weak var deleteButton: UIButton!
-    
-}
