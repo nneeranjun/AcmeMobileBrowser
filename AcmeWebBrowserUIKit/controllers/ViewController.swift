@@ -82,38 +82,47 @@ class ViewController: UIViewController, WKNavigationDelegate, UISearchBarDelegat
     //Update the url and tab when we start navigating
     func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
         let urlString = webView.url?.absoluteString ?? ""
-        let usedTab = getTabContaining(webView: webView)
+        guard let usedTab = getTabContaining(webView: webView) else {
+            self.searchBar.isLoading = false
+            return
+        }
         
-        updateSearchAndTabURL(updatedURL: urlString, tab: usedTab!)
+        updateSearchAndTabURL(updatedURL: urlString, tab: usedTab)
     }
     
     //Once we have finished navigating, we know we did not hit an error, so set our type to normal, update the search and tab url, switch to our new tab, and remove the loading indicator.
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        let usedTab = getTabContaining(webView: webView)
         let urlString = webView.url?.absoluteString ?? ""
+        guard let usedTab = getTabContaining(webView: webView) else {
+            self.searchBar.isLoading = false
+            return
+        }
         
-        if usedTab?.webView == tabs[currentTabIndex].webView  {
+        if usedTab.webView == tabs[currentTabIndex].webView  {
             searchBar.isLoading = false
         }
         
-        updateSearchAndTabURL(updatedURL: urlString, tab: usedTab!)
-        usedTab?.type = .normal
+        updateSearchAndTabURL(updatedURL: urlString, tab: usedTab)
+        usedTab.type = .normal
     }
     
     //If we encounter an error in navigating, remove the loading indicator and current page and transition to the error page
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
-        let usedTab = getTabContaining(webView: webView)
         let urlString = webView.url?.absoluteString ?? ""
+        guard let usedTab = getTabContaining(webView: webView) else {
+            self.searchBar.isLoading = false
+            return
+        }
         
-        if usedTab?.webView == tabs[currentTabIndex].webView  {
+        if usedTab.webView == tabs[currentTabIndex].webView  {
             searchBar.isLoading = false
         }
         
         presentURLDoesNotExistAlert(error: error)
-        updateSearchAndTabURL(updatedURL: urlString, tab: usedTab!)
+        updateSearchAndTabURL(updatedURL: urlString, tab: usedTab)
         
-        if usedTab!.type == .newTab {
-            usedTab!.webView.removeFromSuperview()
+        if usedTab.type == .newTab {
+            usedTab.webView.removeFromSuperview()
             loadNewTabPage()
         }
     }
@@ -125,8 +134,8 @@ class ViewController: UIViewController, WKNavigationDelegate, UISearchBarDelegat
         searchBar.resignFirstResponder()
         
         if searchText.isValidURL {
-            searchBar.isLoading = true
             let tab = tabs[currentTabIndex]
+            searchBar.isLoading = true
             tab.url = searchText
             loadPageWithinCurrentTab(url: tab.url)
         } else {
@@ -144,7 +153,6 @@ class ViewController: UIViewController, WKNavigationDelegate, UISearchBarDelegat
     
     @IBAction func refresh(_ sender: Any) {
         let currTab = tabs[currentTabIndex]
-        
         if currTab.type != .newTab {
             currTab.webView.reload()
         }
