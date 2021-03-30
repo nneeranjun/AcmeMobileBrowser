@@ -89,9 +89,12 @@ class ViewController: UIViewController, WKNavigationDelegate, UISearchBarDelegat
     
     //Once we have finished navigating, we know we did not hit an error, so set our type to normal, update the search and tab url, switch to our new tab, and remove the loading indicator.
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        self.removeSpinner()
-        let urlString = webView.url?.absoluteString ?? ""
         let usedTab = getTabContaining(webView: webView)
+        let urlString = webView.url?.absoluteString ?? ""
+        
+        if usedTab?.webView == tabs[currentTabIndex].webView  {
+            searchBar.isLoading = false
+        }
         
         updateSearchAndTabURL(updatedURL: urlString, tab: usedTab!)
         usedTab?.type = .normal
@@ -99,12 +102,14 @@ class ViewController: UIViewController, WKNavigationDelegate, UISearchBarDelegat
     
     //If we encounter an error in navigating, remove the loading indicator and current page and transition to the error page
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
-        self.removeSpinner()
-        presentURLDoesNotExistAlert(error: error)
-        
-        let urlString = webView.url?.absoluteString ?? ""
         let usedTab = getTabContaining(webView: webView)
+        let urlString = webView.url?.absoluteString ?? ""
         
+        if usedTab?.webView == tabs[currentTabIndex].webView  {
+            searchBar.isLoading = false
+        }
+        
+        presentURLDoesNotExistAlert(error: error)
         updateSearchAndTabURL(updatedURL: urlString, tab: usedTab!)
         
         if usedTab!.type == .newTab {
@@ -120,7 +125,7 @@ class ViewController: UIViewController, WKNavigationDelegate, UISearchBarDelegat
         searchBar.resignFirstResponder()
         
         if searchText.isValidURL {
-            self.showSpinner(onView: self.view)
+            searchBar.isLoading = true
             let tab = tabs[currentTabIndex]
             tab.url = searchText
             loadPageWithinCurrentTab(url: tab.url)
@@ -230,7 +235,6 @@ class ViewController: UIViewController, WKNavigationDelegate, UISearchBarDelegat
     
     //loads new page within current tab
     func loadPageWithinCurrentTab(url: String) {
-        
         let currTab = tabs[currentTabIndex]
         let request = URLRequest(url: URL(string: url)!) //this is ok since I already validated url in the calling function
         currTab.url = url

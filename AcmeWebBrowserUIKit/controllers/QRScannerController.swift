@@ -16,6 +16,7 @@ class QRScannerController: UIViewController, AVCaptureMetadataOutputObjectsDeleg
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("loaded")
         
         if !isCameraEnabled() {
             requestCameraAccess()
@@ -24,7 +25,11 @@ class QRScannerController: UIViewController, AVCaptureMetadataOutputObjectsDeleg
         view.backgroundColor = UIColor.black
         captureSession = AVCaptureSession()
 
-        guard let videoCaptureDevice = AVCaptureDevice.default(for: .video) else { return }
+        guard let videoCaptureDevice = AVCaptureDevice.default(for: .video) else {
+            print("can't do video cap device")
+            failed()
+            return
+        }
         let videoInput: AVCaptureDeviceInput
 
         do {
@@ -49,7 +54,8 @@ class QRScannerController: UIViewController, AVCaptureMetadataOutputObjectsDeleg
             metadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
             metadataOutput.metadataObjectTypes = [.qr]
         } else {
-            //failed()
+            print("cant")
+            failed()
             return
         }
 
@@ -70,10 +76,15 @@ class QRScannerController: UIViewController, AVCaptureMetadataOutputObjectsDeleg
     }
     
     func failed() {
-        let ac = UIAlertController(title: "Scanning not supported", message: "Your device does not support scanning a code from an item. Please use a device with a camera.", preferredStyle: .alert)
-        ac.addAction(UIAlertAction(title: "OK", style: .default))
-        present(ac, animated: true)
-        captureSession = nil
+        DispatchQueue.main.async {
+            let ac = UIAlertController(title: "Scanning not supported", message: "Your device does not support scanning a code from an item. Please use a device with a camera.", preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+                self.dismiss(animated: true, completion: nil)
+                
+            }))
+            self.present(ac, animated: false)
+            self.captureSession = nil
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
