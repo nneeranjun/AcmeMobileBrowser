@@ -25,7 +25,6 @@ class Tab {
     
     var title: String {
         if url == "" {
-            print(url)
             return "Empty Tab"
         } else {
             return url
