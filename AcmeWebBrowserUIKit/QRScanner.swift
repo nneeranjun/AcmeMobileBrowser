@@ -104,7 +104,7 @@ class QRScanner: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     }
 
     func found(code: String) {
-        if delegate.validateURL(url: code) {
+        if code.isValidURL {
             let newTab = Tab(url: code, type: .normal)
             delegate.addNewTab(newTab)
             dismiss(animated: true, completion: nil)

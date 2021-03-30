@@ -19,6 +19,7 @@
 		1199F8EF260DAD69002EC104 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1199F8ED260DAD69002EC104 /* LaunchScreen.storyboard */; };
 		1199F8FA260DAD6A002EC104 /* AcmeWebBrowserUIKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1199F8F9260DAD6A002EC104 /* AcmeWebBrowserUIKitTests.swift */; };
 		1199F905260DAD6A002EC104 /* AcmeWebBrowserUIKitUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1199F904260DAD6A002EC104 /* AcmeWebBrowserUIKitUITests.swift */; };
+		119DB21D2612E60F000552BA /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119DB21C2612E60F000552BA /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,7 @@
 		1199F900260DAD6A002EC104 /* AcmeWebBrowserUIKitUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AcmeWebBrowserUIKitUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1199F904260DAD6A002EC104 /* AcmeWebBrowserUIKitUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcmeWebBrowserUIKitUITests.swift; sourceTree = "<group>"; };
 		1199F906260DAD6A002EC104 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		119DB21C2612E60F000552BA /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +120,7 @@
 				117CB349260FC01B00A3069B /* NewTabPage.swift */,
 				117CB35D2610475900A3069B /* Tab.swift */,
 				117CB38B2611BFE600A3069B /* QRScanner.swift */,
+				119DB21C2612E60F000552BA /* Extensions.swift */,
 			);
 			path = AcmeWebBrowserUIKit;
 			sourceTree = "<group>";
@@ -271,6 +274,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				117CB34A260FC01B00A3069B /* NewTabPage.swift in Sources */,
+				119DB21D2612E60F000552BA /* Extensions.swift in Sources */,
 				1199F8E7260DAD67002EC104 /* ViewController.swift in Sources */,
 				1199F8E3260DAD67002EC104 /* AppDelegate.swift in Sources */,
 				1199F8E5260DAD67002EC104 /* SceneDelegate.swift in Sources */,

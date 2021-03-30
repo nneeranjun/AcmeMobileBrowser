@@ -13,7 +13,6 @@ class TabTableView: UIViewController, UITableViewDelegate, UITableViewDataSource
     
     weak var delegate: ViewController!
     var tabs: [Tab] = []
-    var currentTabIndex: Int!
 
     @IBOutlet weak var tableView: UITableView!
     
@@ -36,18 +35,18 @@ class TabTableView: UIViewController, UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let row = UITableViewCell(style: .default, reuseIdentifier: "basicRow")
-//        let row: TabCell = self.tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier) as! TabCell
         row.textLabel?.text = tabs[indexPath.row].title
         row.imageView?.image = UIImage(systemName: "safari")
-        if indexPath.row == currentTabIndex {
+        
+        if indexPath.row == delegate.currentTabIndex {
             row.backgroundColor = .secondarySystemBackground
         }
+        
         return row
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        delegate.switchTab(to: indexPath.row
-        )
+        delegate.switchTab(to: indexPath.row)
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -65,6 +64,7 @@ class TabTableView: UIViewController, UITableViewDelegate, UITableViewDataSource
             if delegate.deleteTab(at: indexPath.row) {
                 dismiss(animated: true, completion: nil)
             }
+            
         }
     }
     

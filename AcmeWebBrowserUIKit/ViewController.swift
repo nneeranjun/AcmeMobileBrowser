@@ -8,9 +8,6 @@
 import UIKit
 import WebKit
 
-//TODO: Make sure back, forward works when error page is loaded
-//TODO: Handle empty tab list
-
 class ViewController: UIViewController, WKNavigationDelegate, UITextFieldDelegate {
     
     @IBOutlet weak var webViewContainer: UIView!
@@ -18,7 +15,7 @@ class ViewController: UIViewController, WKNavigationDelegate, UITextFieldDelegat
     
     private let newTabPage = NewTabPage()
     
-    private var currentTabIndex: Int = 0
+    var currentTabIndex: Int = 0
     
     private var tabs: [Tab] = []
     
@@ -33,14 +30,7 @@ class ViewController: UIViewController, WKNavigationDelegate, UITextFieldDelegat
         
         searchBar.delegate = self
         searchBar.clearButtonMode = .whileEditing
-    }
-    
-    func validateURL(url: String) -> Bool {
-        if let URL = URL(string: url), UIApplication.shared.canOpenURL(URL) {
-            return true
-        } else {
-            return false
-        }
+        //searchBar.showsCa
     }
     
     func presentInvalidURLAlert() {
@@ -75,8 +65,15 @@ class ViewController: UIViewController, WKNavigationDelegate, UITextFieldDelegat
         }
     }
     
-    //Once we have finished navigating, we know we did not hit an error, so set our type to normal, update the search and tab url, and switch to our new tab.
+//    func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
+//        if vSpinner == nil {
+//            self.showSpinner(onView: self.view)
+//        }
+//    }
+    
+    //Once we have finished navigating, we know we did not hit an error, so set our type to normal, update the search and tab url, switch to our new tab, and remove the loading indicator.
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        self.removeSpinner()
         let urlString = webView.url?.absoluteString ?? ""
         let usedTab = getTabContaining(webView: webView)
         
@@ -84,8 +81,9 @@ class ViewController: UIViewController, WKNavigationDelegate, UITextFieldDelegat
         usedTab?.type = .normal
     }
     
-    //If we encounter an error in navigating, remove the current page and transition to the error page
+    //If we encounter an error in navigating, remove the loading indicator and current page and transition to the error page
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
+        self.removeSpinner()
         presentURLDoesNotExistAlert()
         
         let urlString = webView.url?.absoluteString ?? ""
@@ -104,7 +102,8 @@ class ViewController: UIViewController, WKNavigationDelegate, UITextFieldDelegat
         let searchText = textField.text ?? ""
         searchBar.resignFirstResponder()
         
-        if validateURL(url: searchText) {
+        if searchText.isValidURL {
+            self.showSpinner(onView: self.view)
             let tab = tabs[currentTabIndex]
             tab.url = searchText
             loadPageWithinCurrentTab(url: tab.url)
@@ -227,6 +226,7 @@ class ViewController: UIViewController, WKNavigationDelegate, UITextFieldDelegat
     
     //loads new page within current tab
     func loadPageWithinCurrentTab(url: String) {
+        
         let currTab = tabs[currentTabIndex]
         let request = URLRequest(url: URL(string: url)!) //this is ok since I already validated url in the calling function
         currTab.url = url
@@ -246,23 +246,10 @@ class ViewController: UIViewController, WKNavigationDelegate, UITextFieldDelegat
             let controller = segue.destination as! TabTableView
             controller.delegate = self
             controller.tabs = tabs
-            controller.currentTabIndex = currentTabIndex
         } else if segue.identifier == "showScanner" {
             let controller = segue.destination as! QRScanner
             controller.delegate = self
         }
     }
 
-}
-
-extension UIView {
-    func bindFrameToSuperviewBounds() {
-        guard let superview = self.superview else { return}
-
-        self.translatesAutoresizingMaskIntoConstraints = false
-        self.topAnchor.constraint(equalTo: superview.topAnchor, constant: 0).isActive = true
-        self.bottomAnchor.constraint(equalTo: superview.bottomAnchor, constant: 0).isActive = true
-        self.leadingAnchor.constraint(equalTo: superview.leadingAnchor, constant: 0).isActive = true
-        self.trailingAnchor.constraint(equalTo: superview.trailingAnchor, constant: 0).isActive = true
-    }
 }
