@@ -38,8 +38,6 @@ class NewTabPage: UIView {
     }
     super.updateConstraints()
   }
-    
-
 
     /*
     // Only override draw() if you perform custom drawing.

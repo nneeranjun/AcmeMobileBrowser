@@ -7,10 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		113852CC260E78490047E4D7 /* TabTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113852CB260E78490047E4D7 /* TabTableView.swift */; };
+		113852CC260E78490047E4D7 /* TabTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113852CB260E78490047E4D7 /* TabTableViewController.swift */; };
 		117CB34A260FC01B00A3069B /* NewTabPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117CB349260FC01B00A3069B /* NewTabPage.swift */; };
 		117CB35E2610475900A3069B /* Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117CB35D2610475900A3069B /* Tab.swift */; };
-		117CB38C2611BFE600A3069B /* QRScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117CB38B2611BFE600A3069B /* QRScanner.swift */; };
+		117CB38C2611BFE600A3069B /* QRScannerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117CB38B2611BFE600A3069B /* QRScannerController.swift */; };
 		1199F8E3260DAD67002EC104 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1199F8E2260DAD67002EC104 /* AppDelegate.swift */; };
 		1199F8E5260DAD67002EC104 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1199F8E4260DAD67002EC104 /* SceneDelegate.swift */; };
 		1199F8E7260DAD67002EC104 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1199F8E6260DAD67002EC104 /* ViewController.swift */; };
@@ -40,10 +40,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		113852CB260E78490047E4D7 /* TabTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabTableView.swift; sourceTree = "<group>"; };
+		113852CB260E78490047E4D7 /* TabTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabTableViewController.swift; sourceTree = "<group>"; };
 		117CB349260FC01B00A3069B /* NewTabPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTabPage.swift; sourceTree = "<group>"; };
 		117CB35D2610475900A3069B /* Tab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tab.swift; sourceTree = "<group>"; };
-		117CB38B2611BFE600A3069B /* QRScanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRScanner.swift; sourceTree = "<group>"; };
+		117CB38B2611BFE600A3069B /* QRScannerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRScannerController.swift; sourceTree = "<group>"; };
 		1199F8DF260DAD67002EC104 /* AcmeWebBrowserUIKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AcmeWebBrowserUIKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1199F8E2260DAD67002EC104 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1199F8E4260DAD67002EC104 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -109,18 +109,16 @@
 		1199F8E1260DAD67002EC104 /* AcmeWebBrowserUIKit */ = {
 			isa = PBXGroup;
 			children = (
+				119DB22726139532000552BA /* controllers */,
 				1199F8E2260DAD67002EC104 /* AppDelegate.swift */,
 				1199F8E4260DAD67002EC104 /* SceneDelegate.swift */,
-				1199F8E6260DAD67002EC104 /* ViewController.swift */,
-				113852CB260E78490047E4D7 /* TabTableView.swift */,
 				1199F8E8260DAD67002EC104 /* Main.storyboard */,
-				1199F8EB260DAD69002EC104 /* Assets.xcassets */,
 				1199F8ED260DAD69002EC104 /* LaunchScreen.storyboard */,
-				1199F8F0260DAD69002EC104 /* Info.plist */,
 				117CB349260FC01B00A3069B /* NewTabPage.swift */,
 				117CB35D2610475900A3069B /* Tab.swift */,
-				117CB38B2611BFE600A3069B /* QRScanner.swift */,
 				119DB21C2612E60F000552BA /* Extensions.swift */,
+				1199F8F0260DAD69002EC104 /* Info.plist */,
+				1199F8EB260DAD69002EC104 /* Assets.xcassets */,
 			);
 			path = AcmeWebBrowserUIKit;
 			sourceTree = "<group>";
@@ -141,6 +139,16 @@
 				1199F906260DAD6A002EC104 /* Info.plist */,
 			);
 			path = AcmeWebBrowserUIKitUITests;
+			sourceTree = "<group>";
+		};
+		119DB22726139532000552BA /* controllers */ = {
+			isa = PBXGroup;
+			children = (
+				117CB38B2611BFE600A3069B /* QRScannerController.swift */,
+				113852CB260E78490047E4D7 /* TabTableViewController.swift */,
+				1199F8E6260DAD67002EC104 /* ViewController.swift */,
+			);
+			path = controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -278,8 +286,8 @@
 				1199F8E7260DAD67002EC104 /* ViewController.swift in Sources */,
 				1199F8E3260DAD67002EC104 /* AppDelegate.swift in Sources */,
 				1199F8E5260DAD67002EC104 /* SceneDelegate.swift in Sources */,
-				113852CC260E78490047E4D7 /* TabTableView.swift in Sources */,
-				117CB38C2611BFE600A3069B /* QRScanner.swift in Sources */,
+				113852CC260E78490047E4D7 /* TabTableViewController.swift in Sources */,
+				117CB38C2611BFE600A3069B /* QRScannerController.swift in Sources */,
 				117CB35E2610475900A3069B /* Tab.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

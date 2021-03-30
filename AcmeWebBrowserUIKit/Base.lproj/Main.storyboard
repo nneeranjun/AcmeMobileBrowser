@@ -36,7 +36,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="68" translatesAutoresizingMaskIntoConstraints="NO" id="3FC-vu-L67">
-                                <rect key="frame" x="54" y="833" width="307.5" height="29"/>
+                                <rect key="frame" x="53.5" y="833" width="307.5" height="29"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9eb-gE-7ud">
                                         <rect key="frame" x="0.0" y="0.0" width="26.5" height="29"/>
@@ -112,10 +112,10 @@
             </objects>
             <point key="canvasLocation" x="-865.21739130434787" y="-280.58035714285711"/>
         </scene>
-        <!--Tab Table View-->
+        <!--Tab Table View Controller-->
         <scene sceneID="d5M-MY-Qx8">
             <objects>
-                <viewController id="QUC-ih-19A" customClass="TabTableView" customModule="AcmeWebBrowserUIKit" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="QUC-ih-19A" customClass="TabTableViewController" customModule="AcmeWebBrowserUIKit" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="moG-Lv-1n9">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -167,10 +167,10 @@
             </objects>
             <point key="canvasLocation" x="512" y="-616"/>
         </scene>
-        <!--Scanner-->
+        <!--Scanner Controller-->
         <scene sceneID="aWh-gv-jJC">
             <objects>
-                <viewController id="Ylg-NW-1HN" customClass="QRScanner" customModule="AcmeWebBrowserUIKit" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Ylg-NW-1HN" customClass="QRScannerController" customModule="AcmeWebBrowserUIKit" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="KLy-Z2-g3a">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

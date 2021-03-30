@@ -9,7 +9,7 @@ import Foundation
 
 import UIKit
 
-class TabTableView: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class TabTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     weak var delegate: ViewController!
     var tabs: [Tab] = []

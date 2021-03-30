@@ -259,11 +259,11 @@ class ViewController: UIViewController, WKNavigationDelegate, UISearchBarDelegat
     //navigation to different views
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showTabs" {
-            let controller = segue.destination as! TabTableView
+            let controller = segue.destination as! TabTableViewController
             controller.delegate = self
             controller.tabs = tabs
         } else if segue.identifier == "showScanner" {
-            let controller = segue.destination as! QRScanner
+            let controller = segue.destination as! QRScannerController
             controller.delegate = self
         }
     }
