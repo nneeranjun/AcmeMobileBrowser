@@ -23,10 +23,6 @@ class Tab {
         self.type = type
     }
     
-    var description : String {
-        "Tab : url : `\(url) - webView : `\(webView)` - type : `\(type)`"
-    }
-    
     var title: String {
         if type == .newTab || url == "" {
             return "Empty Tab"

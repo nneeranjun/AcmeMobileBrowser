@@ -29,7 +29,7 @@
                                 <rect key="frame" x="0.0" y="114" width="414" height="695"/>
                             </containerView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cc5-B7-kCL">
-                                <rect key="frame" x="368" y="57.5" width="26" height="27"/>
+                                <rect key="frame" x="368.5" y="57.5" width="25.5" height="27"/>
                                 <color key="tintColor" red="0.25490196079999999" green="0.35294117650000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal">
                                     <imageReference key="image" image="gobackward" catalog="system" symbolScale="large"/>
@@ -179,6 +179,7 @@
                         <viewLayoutGuide key="safeArea" id="VVO-is-vSn"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <navigationItem key="navigationItem" id="IGa-3j-zWi"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tlm-AM-lIu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
