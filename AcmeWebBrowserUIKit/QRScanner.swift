@@ -12,18 +12,10 @@ class QRScanner: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     var captureSession: AVCaptureSession!
     var previewLayer: AVCaptureVideoPreviewLayer!
     
-    private let invalidQRCodeURLAlert = UIAlertController(title: "Invalid QR Code URL", message: "Please scan a QR code with a valid URL", preferredStyle: UIAlertController.Style.alert)
-    
     weak var delegate: ViewController!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        invalidQRCodeURLAlert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: { [self] _ in
-            if (!(captureSession?.isRunning ?? false)) {
-                captureSession.startRunning()
-            }
-        }))
         
         if !isCameraEnabled() {
             requestCameraAccess()
@@ -44,6 +36,7 @@ class QRScanner: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
         if (captureSession.canAddInput(videoInput)) {
             captureSession.addInput(videoInput)
         } else {
+            print("doesnt support")
             failed()
             return
         }
@@ -56,7 +49,7 @@ class QRScanner: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
             metadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
             metadataOutput.metadataObjectTypes = [.qr]
         } else {
-            failed()
+            //failed()
             return
         }
 
@@ -116,6 +109,12 @@ class QRScanner: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
             delegate.addNewTab(newTab)
             dismiss(animated: true, completion: nil)
         } else {
+            let invalidQRCodeURLAlert = UIAlertController(title: "Invalid QR Code URL", message: "Please scan a QR code with a valid URL", preferredStyle: UIAlertController.Style.alert)
+            invalidQRCodeURLAlert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: { [self] _ in
+                if (!(captureSession?.isRunning ?? false)) {
+                    captureSession.startRunning()
+                }
+            }))
             present(invalidQRCodeURLAlert, animated: true, completion: nil)
         }
     }
