@@ -8,10 +8,10 @@
 import UIKit
 import WebKit
 
-class ViewController: UIViewController, WKNavigationDelegate, UITextFieldDelegate {
+class ViewController: UIViewController, WKNavigationDelegate, UISearchBarDelegate {
     
     @IBOutlet weak var webViewContainer: UIView!
-    @IBOutlet weak var searchBar: UITextField!
+    @IBOutlet weak var searchBar: UISearchBar!
     
     private let newTabPage = NewTabPage()
     
@@ -29,8 +29,20 @@ class ViewController: UIViewController, WKNavigationDelegate, UITextFieldDelegat
         addNewTab(entryTab)
         
         searchBar.delegate = self
-        searchBar.clearButtonMode = .whileEditing
-        //searchBar.showsCa
+        searchBar.autocapitalizationType = .none
+        searchBar.setShowsCancelButton(false, animated: false)
+        searchBar.searchTextField.clearButtonMode = .whileEditing
+        searchBar.setBackgroundImage(UIImage(), for: .any, barMetrics: UIBarMetrics.default)
+    }
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchBar.showsCancelButton = true
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.setShowsCancelButton(false, animated: true)
+        searchBar.text = tabs[currentTabIndex].url
+        searchBar.resignFirstResponder()
     }
     
     func presentInvalidURLAlert() {
@@ -98,8 +110,9 @@ class ViewController: UIViewController, WKNavigationDelegate, UITextFieldDelegat
     }
     
     //If the user clicks search, then load the webpage and close the keyboard. If it is invalid, present an alert
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        let searchText = textField.text ?? ""
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        let searchText = searchBar.text ?? ""
+        searchBar.setShowsCancelButton(false, animated: true)
         searchBar.resignFirstResponder()
         
         if searchText.isValidURL {
@@ -110,8 +123,6 @@ class ViewController: UIViewController, WKNavigationDelegate, UITextFieldDelegat
         } else {
             presentInvalidURLAlert()
         }
-        
-        return true
     }
 
     @IBAction func goBack(_ sender: Any) {
